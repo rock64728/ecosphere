@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ==================== -->
+        <!-- CHALLENGES           -->
+        <!-- ==================== -->
+        <record id="view_challenge_list" model="ir.ui.view">
+            <field name="name">ecosphere.challenge.list</field>
+            <field name="model">ecosphere.challenge</field>
+            <field name="arch" type="xml">
+                <list decoration-muted="state == 'archived'" decoration-success="state == 'active'">
+                    <field name="name"/>
+                    <field name="category_id"/>
+                    <field name="xp_reward"/>
+                    <field name="deadline"/>
+                    <field name="state" widget="badge"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_challenge_form" model="ir.ui.view">
+            <field name="name">ecosphere.challenge.form</field>
+            <field name="model">ecosphere.challenge</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,active,archived"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="category_id"/>
+                                <field name="deadline"/>
+                            </group>
+                            <group>
+                                <field name="xp_reward"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Instructions">
+                                <field name="description" placeholder="How do employees complete this challenge?"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_challenge" model="ir.actions.act_window">
+            <field name="name">Challenges</field>
+            <field name="res_model">ecosphere.challenge</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- ==================== -->
+        <!-- REWARDS (Kanban!)    -->
+        <!-- ==================== -->
+        <record id="view_reward_kanban" model="ir.ui.view">
+            <field name="name">ecosphere.reward.kanban</field>
+            <field name="model">ecosphere.reward</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click" style="border: 1px solid #ddd; border-radius: 8px; padding: 10px; margin-bottom: 10px; background-color: #f8f9fa;">
+                                <strong style="font-size: 16px; color: #2E8B57;"><field name="name"/></strong>
+                                <div style="margin-top: 5px;">
+                                    <span>Points Required: <strong><field name="points_required"/></strong></span>
+                                </div>
+                                <div style="margin-top: 5px;">
+                                    <span>Stock Left: <field name="stock_status" widget="badge"/></span>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_reward_form" model="ir.ui.view">
+            <field name="name">ecosphere.reward.form</field>
+            <field name="model">ecosphere.reward</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="points_required"/>
+                            <field name="stock_status"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_reward" model="ir.actions.act_window">
+            <field name="name">Reward Catalog</field>
+            <field name="res_model">ecosphere.reward</field>
+            <field name="view_mode">kanban,list,form</field>
+        </record>
+
+        <!-- ==================== -->
+        <!-- REWARD REDEMPTION    -->
+        <!-- ==================== -->
+        <record id="view_redemption_list" model="ir.ui.view">
+            <field name="name">ecosphere.reward.redemption.list</field>
+            <field name="model">ecosphere.reward.redemption</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="date"/>
+                    <field name="employee_id"/>
+                    <field name="reward_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_redemption" model="ir.actions.act_window">
+            <field name="name">Redemptions</field>
+            <field name="res_model">ecosphere.reward.redemption</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- ==================== -->
+        <!-- MENU LINKS           -->
+        <!-- ==================== -->
+        <menuitem id="menu_challenges" name="Challenges" parent="menu_eco_gamification" action="action_challenge" sequence="10"/>
+        <menuitem id="menu_rewards" name="Reward Catalog" parent="menu_eco_gamification" action="action_reward" sequence="20"/>
+        <menuitem id="menu_redemptions" name="Redemptions" parent="menu_eco_gamification" action="action_redemption" sequence="30"/>
+    </data>
+</odoo>

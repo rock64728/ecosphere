@@ -19,6 +19,7 @@
         'views/menu_views.xml',
         'views/esg_core_views.xml',
         'views/esg_social_views.xml',
+        'views/esg_gamification_views.xml'
     ],
     'installable': True,
     'application': True,

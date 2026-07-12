@@ -1,1 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ecosphere_category,ecosphere.category,model_ecosphere_category,,1,1,1,1
+access_ecosphere_emission_factor,ecosphere.emission.factor,model_ecosphere_emission_factor,,1,1,1,1
+access_ecosphere_carbon_transaction,ecosphere.carbon.transaction,model_ecosphere_carbon_transaction,,1,1,1,1

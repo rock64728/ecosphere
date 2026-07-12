@@ -21,6 +21,7 @@
         'views/esg_social_views.xml',
         'views/esg_gamification_views.xml',
         'views/esg_dashboard_views.xml',
+        'reports/esg_report_views.xml',
     ],
     'installable': True,
     'application': True,

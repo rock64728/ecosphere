@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- Root Menu (This becomes the App icon on the Odoo home screen) -->
+        <!-- Root Menu (This becomes the App icon) -->
         <menuitem id="menu_ecosphere_root" 
                   name="EcoSphere" 
                   web_icon="ecosphere,static/description/icon.png"

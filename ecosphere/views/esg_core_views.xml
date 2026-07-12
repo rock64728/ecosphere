@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- EMISSION FACTORS -->
+        <record id="view_emission_factor_list" model="ir.ui.view">
+            <field name="name">ecosphere.emission.factor.list</field>
+            <field name="model">ecosphere.emission.factor</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="carbon_value_per_unit"/>
+                    <field name="uom"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_emission_factor_form" model="ir.ui.view">
+            <field name="name">ecosphere.emission.factor.form</field>
+            <field name="model">ecosphere.emission.factor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="carbon_value_per_unit"/>
+                            <field name="uom"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_emission_factor" model="ir.actions.act_window">
+            <field name="name">Emission Factors</field>
+            <field name="res_model">ecosphere.emission.factor</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- CARBON TRANSACTIONS -->
+        <record id="view_carbon_transaction_list" model="ir.ui.view">
+            <field name="name">ecosphere.carbon.transaction.list</field>
+            <field name="model">ecosphere.carbon.transaction</field>
+            <field name="arch" type="xml">
+                <list decoration-danger="calculated_emissions > 1000" decoration-warning="calculated_emissions > 500">
+                    <field name="date"/>
+                    <field name="name"/>
+                    <field name="department_id"/>
+                    <field name="calculated_emissions" sum="Total Emissions"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_carbon_transaction_form" model="ir.ui.view">
+            <field name="name">ecosphere.carbon.transaction.form</field>
+            <field name="model">ecosphere.carbon.transaction</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="department_id"/>
+                                <field name="date"/>
+                            </group>
+                            <group>
+                                <field name="emission_factor_id"/>
+                                <field name="quantity"/>
+                                <field name="calculated_emissions" readonly="1" force_save="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_carbon_transaction_graph" model="ir.ui.view">
+            <field name="name">ecosphere.carbon.transaction.graph</field>
+            <field name="model">ecosphere.carbon.transaction</field>
+            <field name="arch" type="xml">
+                <graph string="Carbon Emissions by Department" type="bar">
+                    <field name="department_id"/>
+                    <field name="calculated_emissions" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_carbon_transaction" model="ir.actions.act_window">
+            <field name="name">Carbon Transactions</field>
+            <field name="res_model">ecosphere.carbon.transaction</field>
+            <field name="view_mode">list,form,graph</field> 
+        </record>
+
+        <!-- CATEGORIES -->
+        <record id="action_esg_category" model="ir.actions.act_window">
+            <field name="name">Categories</field>
+            <field name="res_model">ecosphere.category</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- MENU LINKS (These attach to the root menus above) -->
+        <menuitem id="menu_carbon_transactions" name="Carbon Transactions" parent="menu_eco_environmental" action="action_carbon_transaction" sequence="10"/>
+        <menuitem id="menu_emission_factors" name="Emission Factors" parent="menu_eco_configuration" action="action_emission_factor" sequence="10"/>
+        <menuitem id="menu_esg_category" name="Categories" parent="menu_eco_configuration" action="action_esg_category" sequence="20"/>
+    </data>
+</odoo>

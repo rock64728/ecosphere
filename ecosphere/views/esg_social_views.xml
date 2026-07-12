@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ==================== -->
+        <!-- CSR ACTIVITIES       -->
+        <!-- ==================== -->
+        <record id="view_csr_activity_list" model="ir.ui.view">
+            <field name="name">ecosphere.csr.activity.list</field>
+            <field name="model">ecosphere.csr.activity</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="date"/>
+                    <field name="name"/>
+                    <field name="category_id"/>
+                    <field name="points_offered"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_csr_activity_form" model="ir.ui.view">
+            <field name="name">ecosphere.csr.activity.form</field>
+            <field name="model">ecosphere.csr.activity</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="category_id"/>
+                                <field name="date"/>
+                            </group>
+                            <group>
+                                <field name="points_offered"/>
+                                <field name="active" widget="boolean_toggle"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description" placeholder="Describe the CSR initiative here..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_csr_activity" model="ir.actions.act_window">
+            <field name="name">CSR Activities</field>
+            <field name="res_model">ecosphere.csr.activity</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- ==================== -->
+        <!-- EMPLOYEE PARTICIPATION-->
+        <!-- ==================== -->
+        <record id="view_participation_list" model="ir.ui.view">
+            <field name="name">ecosphere.participation.list</field>
+            <field name="model">ecosphere.participation</field>
+            <field name="arch" type="xml">
+                <!-- Color-code based on approval status -->
+                <list decoration-success="state == 'approved'" decoration-info="state == 'pending'" decoration-danger="state == 'rejected'">
+                    <field name="completion_date"/>
+                    <field name="employee_id"/>
+                    <field name="activity_id"/>
+                    <field name="state" widget="badge"/>
+                    <field name="points_earned" sum="Total Points"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_participation_form" model="ir.ui.view">
+            <field name="name">ecosphere.participation.form</field>
+            <field name="model">ecosphere.participation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <!-- Header with buttons and status bar -->
+                    <header>
+                        <button name="action_approve" string="Approve" type="object" class="oe_highlight" invisible="state in ('approved', 'rejected')"/>
+                        <button name="action_reject" string="Reject" type="object" invisible="state in ('approved', 'rejected')"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,pending,approved"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="activity_id"/>
+                                <field name="completion_date"/>
+                            </group>
+                            <group>
+                                <field name="proof" filename="proof_name"/>
+                                <!-- Points earned auto-populates only when approved -->
+                                <field name="points_earned" readonly="1" force_save="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_participation" model="ir.actions.act_window">
+            <field name="name">Employee Participation</field>
+            <field name="res_model">ecosphere.participation</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- ==================== -->
+        <!-- MENU LINKS           -->
+        <!-- ==================== -->
+        <!-- Linking to the 'Social' menu we made earlier -->
+        <menuitem id="menu_csr_activities" name="CSR Activities" parent="menu_eco_social" action="action_csr_activity" sequence="10"/>
+        <menuitem id="menu_employee_participation" name="Employee Participation" parent="menu_eco_social" action="action_participation" sequence="20"/>
+
+    </data>
+</odoo>

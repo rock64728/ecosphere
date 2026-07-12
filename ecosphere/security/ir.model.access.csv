@@ -4,3 +4,6 @@ access_ecosphere_emission_factor,ecosphere.emission.factor,model_ecosphere_emiss
 access_ecosphere_carbon_transaction,ecosphere.carbon.transaction,model_ecosphere_carbon_transaction,,1,1,1,1
 access_ecosphere_csr_activity,ecosphere.csr.activity,model_ecosphere_csr_activity,,1,1,1,1
 access_ecosphere_participation,ecosphere.participation,model_ecosphere_participation,,1,1,1,1
+access_ecosphere_challenge,ecosphere.challenge,model_ecosphere_challenge,,1,1,1,1
+access_ecosphere_reward,ecosphere.reward,model_ecosphere_reward,,1,1,1,1
+access_ecosphere_reward_redemption,ecosphere.reward.redemption,model_ecosphere_reward_redemption,,1,1,1,1

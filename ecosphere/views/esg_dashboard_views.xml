@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Graph View for the WOW Factor -->
+        <record id="view_dept_score_graph" model="ir.ui.view">
+            <field name="name">ecosphere.department.score.graph</field>
+            <field name="model">ecosphere.department.score</field>
+            <field name="arch" type="xml">
+                <graph string="ESG Scores by Department" type="bar">
+                    <field name="department_id"/>
+                    <field name="total_score" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- List View for Department Rankings -->
+        <record id="view_dept_score_list" model="ir.ui.view">
+            <field name="name">ecosphere.department.score.list</field>
+            <field name="model">ecosphere.department.score</field>
+            <field name="arch" type="xml">
+                <!-- Highlight top performing departments in green -->
+                <list decoration-success="total_score >= 80" decoration-warning="total_score &lt; 50">
+                    <field name="department_id"/>
+                    <field name="env_score" widget="progressbar"/>
+                    <field name="soc_score" widget="progressbar"/>
+                    <field name="gov_score" widget="progressbar"/>
+                    <field name="total_score" widget="badge"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_dept_score_form" model="ir.ui.view">
+            <field name="name">ecosphere.department.score.form</field>
+            <field name="model">ecosphere.department.score</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="department_id" placeholder="Select Department"/></h1>
+                        </div>
+                        <group>
+                            <group string="Score Breakdown">
+                                <field name="env_score" widget="gauge" options="{'max_field': 100}"/>
+                                <field name="soc_score" widget="gauge" options="{'max_field': 100}"/>
+                                <field name="gov_score" widget="gauge" options="{'max_field': 100}"/>
+                            </group>
+                            <group string="Overall">
+                                <field name="total_score" style="font-size: 30px; font-weight: bold; color: #2E8B57;"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_dashboard" model="ir.actions.act_window">
+            <field name="name">ESG Dashboard</field>
+            <field name="res_model">ecosphere.department.score</field>
+            <field name="view_mode">graph,list,form</field>
+        </record>
+
+        <!-- Attach it to the very top Dashboard menu -->
+        <menuitem id="menu_main_dashboard" name="Live Dashboard" parent="menu_eco_dashboard" action="action_dashboard" sequence="1"/>
+    </data>
+</odoo>

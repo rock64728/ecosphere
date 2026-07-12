@@ -7,3 +7,4 @@ access_ecosphere_participation,ecosphere.participation,model_ecosphere_participa
 access_ecosphere_challenge,ecosphere.challenge,model_ecosphere_challenge,,1,1,1,1
 access_ecosphere_reward,ecosphere.reward,model_ecosphere_reward,,1,1,1,1
 access_ecosphere_reward_redemption,ecosphere.reward.redemption,model_ecosphere_reward_redemption,,1,1,1,1
+access_ecosphere_department_score,ecosphere.department.score,model_ecosphere_department_score,,1,1,1,1

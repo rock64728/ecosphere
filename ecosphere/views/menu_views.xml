@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Root Menu (This becomes the App icon on the Odoo home screen) -->
+        <menuitem id="menu_ecosphere_root" 
+                  name="EcoSphere" 
+                  web_icon="ecosphere,static/description/icon.png"
+                  sequence="10"/>
+
+        <!-- Core Module Submenus -->
+        <menuitem id="menu_eco_dashboard" name="Dashboard" parent="menu_ecosphere_root" sequence="10"/>
+        <menuitem id="menu_eco_environmental" name="Environmental" parent="menu_ecosphere_root" sequence="20"/>
+        <menuitem id="menu_eco_social" name="Social" parent="menu_ecosphere_root" sequence="30"/>
+        <menuitem id="menu_eco_governance" name="Governance" parent="menu_ecosphere_root" sequence="40"/>
+        <menuitem id="menu_eco_gamification" name="Gamification" parent="menu_ecosphere_root" sequence="50"/>
+        
+        <!-- Configuration Menu -->
+        <menuitem id="menu_eco_configuration" name="Configuration" parent="menu_ecosphere_root" sequence="100"/>
+    </data>
+</odoo>

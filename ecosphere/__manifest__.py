@@ -15,9 +15,8 @@
     'author': 'Jenil Prajapati',
     'depends': ['base', 'hr', 'mail', 'board'],
     'data': [
-        # We will uncomment these as we create them in the next steps
-        # 'security/ir.model.access.csv',
-        # 'views/menu_views.xml',
+        'security/ir.model.access.csv',
+        'views/menu_views.xml',
     ],
     'installable': True,
     'application': True,
